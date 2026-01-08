@@ -43,7 +43,7 @@ El taller se divide en 3 sesiones intensivas:
 
 ## 🚀 Cómo empezar
 1. **Inscríbete**: Completa el [formulario de registro aquí](https://forms.gle/3YqyCd3dy9Ltx6ZA6).
-2. **Presentación**: Para ver la página de presentación del curso, abre el archivo `curso.html` en tu navegador.
+2. **Presentación**: Para ver la página de presentación del curso, abre el archivo `index.html` en tu navegador.
 
 ---
 *JORGE ULLOA ROA © 2026 | DATOS ABIERTOS*
