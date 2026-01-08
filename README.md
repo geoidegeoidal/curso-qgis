@@ -39,7 +39,7 @@ El taller se divide en 3 sesiones intensivas:
 ## 💰 Inversión y Detalles
 * **Público General:** $40.000 CLP
 * **Estudiantes:** $30.000 CLP (Cupos limitados)
-* **Formato:** 3 Sesiones Online vía Zoom.
+* **Formato:** 4 Sesiones Online vía Google Meet.
 * **Incluye:** Pack de Datos Verificados y Certificado Digital.
 
 ## 🚀 Cómo empezar
