@@ -36,11 +36,21 @@
             color: var(--text-main);
             font-family: 'Rajdhani', sans-serif;
             overflow-x: hidden;
-            background-image:
-                linear-gradient(var(--grid-color) 1px, transparent 1px),
-                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-            background-size: 50px 50px;
+            /* REMOVED STATIC GRID BG TO USE CANVAS */
+            position: relative;
         }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+            /* Let clicks pass through */
+        }
+
 
         /* TIPOGRAFÍA */
         .mono {
@@ -424,6 +434,7 @@
 </head>
 
 <body>
+    <canvas id="bg-canvas"></canvas>
 
     <header class="hero">
         <span class="mono" style="color: var(--neon-cyan); letter-spacing: 2px; margin-bottom: 1rem;">WORKSHOP
@@ -556,6 +567,173 @@
         <p class="mono">JORGE ULLOA ROA © 2026 | DATOS ABIERTOS</p>
     </footer>
 
+    <script>
+        /**
+         * EFECTO 1: GIS NETWORK BACKGROUND (CANVAS)
+         * Simula una red de nodos geodésicos conectados.
+         */
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let connections = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5; // Velocidad lenta
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Rebotar en bordes
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.fillStyle = 'rgba(0, 243, 255, 0.3)'; // Neon Cyan con transparencia
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // Inicializar partículas
+        const particleCount = window.innerWidth < 768 ? 40 : 80; // Menos en móvil
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        // Mouse interaction
+        let mouse = { x: null, y: null };
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+        });
+        window.addEventListener('mouseout', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Loop partículas
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                // Conectar con otras partículas cercanas
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 150) {
+                        ctx.strokeStyle = `rgba(0, 243, 255, ${1 - distance / 150})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+
+                // Conectar con mouse (Interacción "Magnetic")
+                if (mouse.x != null) {
+                    const dx = particles[i].x - mouse.x;
+                    const dy = particles[i].y - mouse.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 200) {
+                        ctx.strokeStyle = `rgba(188, 19, 254, ${1 - distance / 200})`; // Neon Pink interaction
+                        ctx.lineWidth = 0.8;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.stroke();
+
+                        // Sutil repulsión del mouse para dar vida
+                        if (distance < 100) {
+                            particles[i].x += dx * 0.01;
+                            particles[i].y += dy * 0.01;
+                        }
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+
+        /**
+         * EFECTO 2: TEXT DECODING (Matrix Style)
+         * "Desencripta" el texto al entrar en pantalla.
+         */
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+        const decodeText = (target) => {
+            let iterations = 0;
+            const originalText = target.dataset.value;
+
+            clearInterval(target.interval); // Limpiar intervalo previo si existe
+
+            target.interval = setInterval(() => {
+                target.innerText = originalText.split("")
+                    .map((letter, index) => {
+                        if (index < iterations) {
+                            return originalText[index];
+                        }
+                        return letters[Math.floor(Math.random() * 36)];
+                    })
+                    .join("");
+
+                if (iterations >= originalText.length) {
+                    clearInterval(target.interval);
+                }
+
+                iterations += 1 / 2; // Velocidad de desencriptado
+            }, 30);
+        }
+
+        // Observer para disparar efecto al scrollear
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Si ya se decodificó una vez, no repetir (opcional, aquí lo repetimos para efecto)
+                    decodeText(entry.target);
+                    // Dejar de observar si solo queremos que pase una vez:
+                    // observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 }); // Disparar cuando el 50% del elemento es visible
+
+        // Seleccionar elementos a aplicar efecto (h2, h3 principales)
+        document.querySelectorAll('h2, .cyber-card h3').forEach(header => {
+            // Guardar texto original en data-value
+            header.dataset.value = header.innerText;
+            observer.observe(header);
+
+            // Efecto Hover extra para interactividad
+            header.addEventListener("mouseover", event => {
+                decodeText(event.target);
+            });
+        });
+
+    </script>
 </body>
 
 </html>
