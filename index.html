@@ -813,58 +813,55 @@
             // REMOVED HOVER LISTENER TO AVOID DIZZINES
         });
 
-    </script>
-    });
+        /**
+         * EFECTO 3: CYBER-INJECTION CTA TRANSITION
+         * Intercepta clics en botones de reserva y muestra secuencia de terminal.
+         */
+        document.querySelectorAll('.cta-btn').forEach(btn => {
 
+            btn.addEventListener('click', function (e) {
+                e.preventDefault(); // Detener navegación inmediata
+                const targetUrl = this.href;
+                const overlay = document.getElementById('cyber-overlay');
+                const msg = document.getElementById('overlay-msg');
+                const fill = document.getElementById('progress-fill');
 
-    /**
-    * EFECTO 3: CYBER-INJECTION CTA TRANSITION
-    * Intercepta clics en botones de reserva y muestra secuencia de terminal.
-    */
-    document.querySelectorAll('.cta-btn').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-    e.preventDefault(); // Detener navegación inmediata
-    const targetUrl = this.href;
-    const overlay = document.getElementById('cyber-overlay');
-    const msg = document.getElementById('overlay-msg');
-    const fill = document.getElementById('progress-fill');
+                // 1. Mostrar Overlay
+                overlay.style.display = 'flex';
 
-    // 1. Mostrar Overlay
-    overlay.style.display = 'flex';
+                // 2. Secuencia de textos
+                const steps = [
+                    { time: 0, text: "> ESTABLISHING SECURE CONNECTION..." },
+                    { time: 400, text: "> VERIFYING USER PROTOCOLS..." },
+                    { time: 800, text: "> BYPASSING FIREWALL..." },
+                    { time: 1200, text: "> ACCESS GRANTED." }
+                ];
 
-    // 2. Secuencia de textos
-    const steps = [
-    { time: 0, text: "> ESTABLISHING SECURE CONNECTION..." },
-    { time: 400, text: "> VERIFYING USER PROTOCOLS..." },
-    { time: 800, text: "> BYPASSING FIREWALL..." },
-    { time: 1200, text: "> ACCESS GRANTED." }
-    ];
+                steps.forEach(step => {
+                    setTimeout(() => {
+                        msg.innerText = step.text;
+                    }, step.time);
+                });
 
-    steps.forEach(step => {
-    setTimeout(() => {
-    msg.innerText = step.text;
-    }, step.time);
-    });
+                // 3. Barra de progreso
+                setTimeout(() => {
+                    fill.style.width = '100%';
+                }, 100);
 
-    // 3. Barra de progreso
-    setTimeout(() => {
-    fill.style.width = '100%';
-    }, 100);
+                // 4. Redirección final
+                setTimeout(() => {
+                    window.open(targetUrl, '_blank');
 
-    // 4. Redirección final
-    setTimeout(() => {
-    window.open(targetUrl, '_blank');
-
-    // Resetear overlay (desvanecer)
-    overlay.style.opacity = '0';
-    setTimeout(() => {
-    overlay.style.display = 'none';
-    overlay.style.opacity = '1';
-    fill.style.width = '0%';
-    }, 500);
-    }, 1600);
-    });
-    });
+                    // Resetear overlay (desvanecer)
+                    overlay.style.opacity = '0';
+                    setTimeout(() => {
+                        overlay.style.display = 'none';
+                        overlay.style.opacity = '1';
+                        fill.style.width = '0%';
+                    }, 500);
+                }, 1600);
+            });
+        });
 
     </script>
 </body>
