@@ -3,9 +3,9 @@
 ¡Bienvenido al repositorio del taller! Aquí encontrarás la información oficial y los detalles del curso de visualización territorial.
 
 ## 📌 Resumen del Taller
-**Visualización Territorial con QGIS: Aprende a transformar planillas aburridas en mapas de impacto.**
+**Gestión de Evidencia Geoespacial: Aprende a transformar planillas en mapas de impacto.**
 
-Este taller está diseñado para personas que deseen iniciarse en el mundo de los Sistemas de Información Geográfica (SIG) sin conocimientos previos, trabajando con datos reales y estándares profesionales.
+Enfoque **Data-Driven** centrado en la integridad del dato para la toma de decisiones. Este taller está diseñado para quienes deseen iniciarse en los SIG con estándares oficiales y datos reales.
 
 ## 👨‍🏫 Instructor
 **Jorge Ulloa Roa**
@@ -16,37 +16,38 @@ Este taller está diseñado para personas que deseen iniciarse en el mundo de lo
 
 ## 📖 Programa del Curso
 
-El taller se divide en 3 sesiones intensivas:
+El taller se divide en 4 sesiones intensivas:
 
-### [SESIÓN 01] La Verdad Territorial
-* Fundamentos y "Higiene" del dato.
-* Sistemas de Archivos: La regla de los 5 archivos obligatorios.
-* Coordenadas: Geográficas (Curvas) vs Proyectadas (Planas).
-* Entorno QGIS y navegación satelital.
+### [SESIÓN 01] Fundamentos y Gobernanza del Dato
+* Entorno QGIS (LTR) y complementos esenciales (QuickMapServices).
+* Integridad de Evidencia: Estándar vectorial (Archivos .shp, .dbf, .shx, .prj, .cpg).
+* Sistemas de Referencia (CRS/EPSG): Coordenadas geográficas y proyectadas.
+* Visualización Inicial: Carga de capas y navegación territorial.
 
-### [SESIÓN 02] Inteligencia de Datos
-* Uniones de Tabla (Joins): Cruzar Excel con Mapas.
-* Limpieza de datos: Validar tipos de campo y atributos.
-* Exploración estadística de la tabla.
-* Espacialización de fenómenos sociales.
+### [SESIÓN 02] Gestión de Bases de Datos (El Cruce)
+* Minería de Datos: Exploración y limpieza de Tablas de Atributos.
+* Uniones Espaciales (Joins): Vincular planillas externas (Censo, Excel) al territorio.
+* Normalización: Técnicas para manejar "datos sucios".
+* Validación de tipos de datos (Numérico vs Texto).
 
-### [SESIÓN 03] Narrativa Visual
-* Simbología Categorizada: Cualidades y usos de suelo.
-* Simbología Graduada: Cantidades y mapas de calor (Coropletas).
-* Semántica del color: Diseño crítico vs mapas "bonitos".
-* Visualización de patrones de desigualdad.
+### [SESIÓN 03] Análisis Exploratorio y Consultas
+* Constructor de Consultas (Query Builder): Lógica SQL básico.
+* Cálculo de Campos: Nuevas variables e indicadores en el mapa.
+* Estrategias de Selección: Identificación de "zonas de interés".
+* Detección de patrones mediante filtros lógicos.
 
-### [SESIÓN 04] Diseño de Impacto
-* Etiquetado Inteligente y Buffers de legibilidad.
-* Composición (Print Layout): Grilla, Norte, Escala, Fuente.
-* Estándares profesionales de reporte.
-* Exportación final: PDF Impreso vs PNG Digital.
+### [SESIÓN 04] Comunicación Visual y Salida
+* Simbología Estratégica: Coropletas vs. Categorizados (Color/Tamaño).
+* Composición de Mapa (Layout): Grilla, Norte, Escala, Fuente.
+* Estándares profesionales de validación.
+* Formatos de Exportación: PDF Impreso vs PNG Digital.
 
 ## 💰 Inversión y Detalles
 * **Público General:** $40.000 CLP
 * **Estudiantes:** $30.000 CLP (Cupos limitados)
-* **Formato:** 4 Sesiones Online vía Google Meet.
-* **Incluye:** Pack de Datos Verificados y Certificado Digital.
+* **Formato:** 4 Sesiones Online sincrónicas vía Google Meet.
+* **Incluye:** Pack de Datos Oficial y Certificado Digital.
+* **Requisito:** Mouse indispensable y conexión estable.
 
 ## 🚀 Cómo empezar
 1. **Inscríbete**: Completa el [formulario de registro aquí](https://forms.gle/3YqyCd3dy9Ltx6ZA6).
