@@ -25,4 +25,4 @@ Fechas, cupos, modalidad y valores dependen de cada edición. La información vi
 
 ## Sitio del curso
 
-Si el repositorio incluye index.html, ábrelo desde un servidor web estático para revisar la presentación del taller.
+Abre index.html desde un servidor web estático para revisar la presentación del taller.
